@@ -2,12 +2,19 @@ def fcfs(jobs, arrival_time, burst_time):
     final_time = 0
     gantt_chart = [0]
     for i in range(len(jobs)):
-        if final_time >= int(arrival_time[i]):
+        if final_time < int(arrival_time[i]): # Adds idle time
+            final_time += int(arrival_time[i])
+            gantt_chart.append(final_time)
             gantt_chart.append(jobs[i])
             final_time = final_time + int(burst_time[i])
             gantt_chart.append(final_time)
+            
         else: 
-            final_time += arrival_time[i]
+            gantt_chart.append(jobs[i])
+            final_time = final_time + int(burst_time[i])
+            gantt_chart.append(final_time)
+
+
     print(gantt_chart)
 
 
